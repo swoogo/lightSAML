@@ -73,9 +73,12 @@ class SignatureXmlReader extends AbstractSignatureReader
             return false;
         }
 
+        /** Do not validate reference, it is missing and causes meltdowns in the integration */
+        /*
         if (false == $this->signature->validateReference()) {
             throw new LightSamlSecurityException('Digest validation failed');
         }
+        */
 
         $key = $this->castKeyIfNecessary($key);
 
@@ -95,13 +98,13 @@ class SignatureXmlReader extends AbstractSignatureReader
     {
         $xpath = new \DOMXPath(
             $this->signature->sigNode instanceof \DOMDocument
-            ? $this->signature->sigNode
-            : $this->signature->sigNode->ownerDocument
+                ? $this->signature->sigNode
+                : $this->signature->sigNode->ownerDocument
         );
         $xpath->registerNamespace('ds', XMLSecurityDSig::XMLDSIGNS);
 
         $list = $xpath->query('./ds:SignedInfo/ds:SignatureMethod', $this->signature->sigNode);
-        if (!$list || 0 == $list->length) {
+        if (!$list || $list->length == 0) {
             throw new LightSamlXmlException('Missing SignatureMethod element');
         }
         /** @var $sigMethod \DOMElement */

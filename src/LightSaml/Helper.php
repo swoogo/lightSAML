@@ -68,16 +68,26 @@ final class Helper
      */
     public static function parseSAMLTime($time)
     {
-        $matches = [];
-        if (0 == preg_match(
-                '/^(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?(Z|[+-]\\d\\d:\\d\\d)$/D',
+        $matches = array();
+        if (preg_match(
+                '/^(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?Z?$/D',
                 $time,
                 $matches
-            )) {
+            ) == 0) {
             throw new \InvalidArgumentException('Invalid SAML2 timestamp: '.$time);
         }
 
-        return strtotime($time);
+        $year = intval($matches[1]);
+        $month = intval($matches[2]);
+        $day = intval($matches[3]);
+        $hour = intval($matches[4]);
+        $minute = intval($matches[5]);
+        $second = intval($matches[6]);
+
+        // Use gmmktime because the timestamp will always be given in UTC.
+        $ts = gmmktime($hour, $minute, $second, $month, $day, $year);
+
+        return $ts;
     }
 
     /**
@@ -159,7 +169,7 @@ final class Helper
      */
     public static function validateOptionalString($value)
     {
-        return null === $value || self::validateRequiredString($value);
+        return $value === null || self::validateRequiredString($value);
     }
 
     /**
@@ -170,7 +180,7 @@ final class Helper
     public static function validateWellFormedUriString($value)
     {
         $value = trim($value);
-        if ('' == $value || strlen($value) > 65520) {
+        if ($value == '' || strlen($value) > 65520) {
             return false;
         }
 
@@ -199,7 +209,7 @@ final class Helper
      */
     public static function validateNotBefore($notBefore, $now, $allowedSecondsSkew)
     {
-        return null == $notBefore || (($notBefore - $allowedSecondsSkew) < $now);
+        return $notBefore == null || (($notBefore - $allowedSecondsSkew) < $now);
     }
 
     /**
@@ -211,6 +221,6 @@ final class Helper
      */
     public static function validateNotOnOrAfter($notOnOrAfter, $now, $allowedSecondsSkew)
     {
-        return null == $notOnOrAfter || ($now < ($notOnOrAfter + $allowedSecondsSkew));
+        return $notOnOrAfter == null || ($now < ($notOnOrAfter + $allowedSecondsSkew));
     }
 }
