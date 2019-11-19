@@ -1,5 +1,5 @@
 {
-    "name": "lightsaml/lightsaml",
+    "name": "oborudko/lightsaml",
     "license": "MIT",
     "type": "library",
     "description": "Light SAML 2.0 PHP library",
@@ -28,12 +28,12 @@
         "php": ">=5.6",
         "robrichards/xmlseclibs": "~2.0|~3.0|~4.0",
         "symfony/http-foundation": "~2.3|~3.0|~4.0",
-        "symfony/event-dispatcher": "~2.3|~3.0|~4.0"
+        "symfony/event-dispatcher": "~2.3|~3.0|~4.0",
+        "pimple/pimple": "~3.0"
     },
     "require-dev": {
         "symfony/dom-crawler": "~2.3|~3.0|~4.0",
         "symfony/css-selector": "~2.3|~3.0|~4.0",
-        "pimple/pimple": "~3.0",
         "phpunit/phpunit": ">=5.7",
         "monolog/monolog": "~1.3"
     },
