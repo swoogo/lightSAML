@@ -62,7 +62,7 @@ class SsoSpValidateAssertionActionBuilder extends AbstractProfileActionBuilder
         $this->add(new AssertionSignatureValidatorAction(
             $this->buildContainer->getSystemContainer()->getLogger(),
             $this->buildContainer->getServiceContainer()->getSignatureValidator(),
-            true
+            false
         ));
     }
 }
