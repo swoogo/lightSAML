@@ -23,7 +23,7 @@ use LightSaml\Resolver\Endpoint\DescriptorTypeEndpointResolver;
 use LightSaml\Resolver\Endpoint\IndexEndpointResolver;
 use LightSaml\Resolver\Endpoint\LocationEndpointResolver;
 use LightSaml\Resolver\Endpoint\ServiceTypeEndpointResolver;
-use LightSaml\Resolver\Logout\LogoutSessionResolver;
+use LightSaml\Logout\Resolver\Logout\LogoutSessionResolver;
 use LightSaml\Resolver\Session\SessionProcessor;
 use LightSaml\Resolver\Signature\OwnSignatureResolver;
 use LightSaml\Validator\Model\Assertion\AssertionTimeValidator;
@@ -37,13 +37,13 @@ use Pimple\ServiceProviderInterface;
 
 class ServiceContainerProvider implements ServiceProviderInterface
 {
-    /** @var CredentialContainerInterface */
+    /** @var  CredentialContainerInterface */
     private $credentialContainer;
 
     /** @var SystemContainerInterface */
     private $systemContainer;
 
-    /** @var StoreContainerInterface */
+    /** @var  StoreContainerInterface */
     private $storeContainer;
 
     /**
