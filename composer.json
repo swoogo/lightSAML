@@ -28,7 +28,7 @@
         "php": ">=7.2",
         "swoogo/lightsaml-logout": "1.0.2",
         "robrichards/xmlseclibs": "~4.0",
-        "symfony/http-foundation": "~4.4.7",
+        "symfony/http-foundation": "4.4.7",
         "symfony/event-dispatcher": "~4.0",
         "pimple/pimple": "~3.0"
     },
