@@ -27,7 +27,7 @@
     "require": {
         "php": ">=7.2",
         "swoogo/lightsaml-logout": "1.0.2",
-        "robrichards/xmlseclibs": "~4.0",
+        "robrichards/xmlseclibs": "3.0.4",
         "symfony/http-foundation": "4.4.7",
         "symfony/event-dispatcher": "~4.0",
         "pimple/pimple": "~3.0"
